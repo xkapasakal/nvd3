@@ -253,6 +253,9 @@ nv.models.lineChart = function() {
               pointIndex = nv.interactiveBisect(series.values, e.pointXValue, chart.x());
               lines.highlightPoint(i, pointIndex, true);
               var point = series.values[pointIndex];
+              if (e.pointXValue < series.xMin.x || e.pointXValue > series.xMax.x) {
+                  point = undefined;
+              }
               if (typeof point === 'undefined') return;
               if (typeof singlePoint === 'undefined') singlePoint = point;
               if (typeof pointXLocation === 'undefined') pointXLocation = chart.xScale()(chart.x()(point,pointIndex));
